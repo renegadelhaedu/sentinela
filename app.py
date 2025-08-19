@@ -45,6 +45,7 @@ def carregar_dados(dispositivo):
 
 @app.route('/')
 def home():
+    print('ok')
     return render_template('homepage.html')
 
 @app.route('/botao')
