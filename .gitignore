@@ -1,6 +1,4 @@
-# created by virtualenv automatically
-<<<<<<< HEAD
-=======
-.venv/bin
->>>>>>> d0cb44d (alteração no frontend)
-.venv/
+venv *
+.pyc
+.env
+.DS_Store

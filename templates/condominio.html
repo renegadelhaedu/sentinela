@@ -5,42 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Monitoramento de Casas</title>
     <link rel="stylesheet" href="../static/css/condominio.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="../static/js/socket.io.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Sistema de Monitoramento de Casas</h1>
             <p>Monitoramento em tempo real de sensores de segurança</p>
-
-            <p>
-                <a style="background-color: white; border-radius: 6px;margin-top: 5px"  href="/logs">Clique aqui para acessar os Logs</a>
-            </p>
+            <div class="status-indicator">
+                <div class="status-dot connected" id="statusDot"></div>
+                <span id="statusText">Conectado ao servidor</span>
+            </div>
 
 
         </header>
 
         <div class="status-bar">
-            <div class="status-indicator">
-                <div class="status-dot connected" id="statusDot"></div>
-                <span id="statusText">Conectado ao servidor</span>
-            </div>
-            <div id="lastUpdate">Última atualização: -</div>
+
+            <a href="/pessoa/homepessoa" target="_blank">Gerenciar Pessoas</a>
+            <a href="/logs" target="_blank">Acessar Logs</a>
+
         </div>
 
-        <div class="houses-grid" id="housesGrid">
-            <!-- As casas serão geradas via JavaScript -->
+        <div class="houses-grid" >
+            {% for pessoa in pessoas %}
+
+                <div class="house normal" id="house{{pessoa.numero_casa}}" onclick="mostrarDetalhes({{pessoa.id_pessoa}}, {{pessoa.numero_casa}})">
+                    <div class="house-id">{{pessoa.nome}}</div>
+                    <div class="house-status">Casa {{pessoa.numero_casa}}</div>
+
+                </div>
+
+            {% endfor %}
         </div>
 
-        <div class="alerts-panel">
-            <h2>Histórico de Alertas</h2>
-            <div id="alertsContainer">
-                <!-- Alertas serão adicionados aqui -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="fecharModal()">&times;</span>
+                <div id="modal-body">
+                </div>
             </div>
         </div>
 
         <footer>
-            <p>Sistema de Monitoramento &copy; 2023 - Todos os direitos reservados</p>
+            <p>Sistema de Monitoramento &copy; 2025 - Todos os direitos reservados ao projeto sentinela </p>
         </footer>
     </div>
 
