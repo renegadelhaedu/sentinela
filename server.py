@@ -9,7 +9,7 @@ from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO
 from controllers.pessoa_bp import pessoa_bp
 from controllers.log_bp import log_bp
-from database import PessoaDAO, Session, LogDAO
+from database.dao import PessoaDAO, Session, LogDAO
 from models.log import Log
 
 app = Flask(__name__)

@@ -1,4 +1,4 @@
-from database import PessoaDAO, Session
+from database.dao import PessoaDAO, Session
 
 session = Session()
 

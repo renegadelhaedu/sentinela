@@ -5,14 +5,17 @@ import tocarsom
 from flask import Flask, render_template, jsonify, request
 from controllers.pessoa_bp import pessoa_bp
 from controllers.log_bp import log_bp
-from database import PessoaDAO, Session, LogDAO
+from database.dao import PessoaDAO, Session, LogDAO
 from models.log import Log
+from database.models_db import Base
+from database.dao import engine
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'LJlhr3324DH1'
 
 app.register_blueprint(pessoa_bp)
 app.register_blueprint(log_bp)
+
 
 
 
@@ -68,8 +71,9 @@ if __name__ == '__main__':
     # gunicorn --worker-class eventlet -w 1 --bind 0.0.0.0:5000 server:app
     #nao pode executar via usuario root pois ele nao deixar tocar o mp3.
     #tem que dar permissao de escrita ao diretorio do projeto para este usuário novo (sem ser root)
+    Base.metadata.create_all(bind=engine)
     app.run(
                  host='0.0.0.0',
                  port=5000,
                  debug=False,
-                 allow_unsafe_werkzeug=True)
+                 )
