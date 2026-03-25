@@ -77,6 +77,7 @@ def cadastrar_pessoa():
             dao = PessoaDAO(session)
             dao.salvar_pessoa(nova_pessoa)
 
+
             return redirect(url_for('pessoa.listar_pessoas'))
         finally:
             session.close()
